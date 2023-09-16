@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://xxpf2h15f057"]
+
+[ext_resource type="Texture2D" uid="uid://dt458tt0d27li" path="res://asset/icons/skills/empty_effect.png" id="1_lbfkj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o6bt2"]
+texture = ExtResource("1_lbfkj")
+
+[node name="empty_effect" type="Panel"]
+custom_minimum_size = Vector2(30, 30)
+theme_override_styles/panel = SubResource("StyleBoxTexture_o6bt2")

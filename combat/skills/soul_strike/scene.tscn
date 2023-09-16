@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://combat/skills/soul_strike/script.gd" id="1_hndmb"]
+[ext_resource type="AudioStream" uid="uid://chr6y2h5cg71t" path="res://asset/sounds/ef_soulstrike.wav" id="2_tg1ow"]
+
+[sub_resource type="Curve3D" id="Curve3D_7lkh3"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.5, 0, 0, 0.7, 0, -0.5, 0.25, 0, 0, 0, 0, 0, 0, 0, 0, 0.5, 0),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g8wik"]
+margin = 0.01
+radius = 0.15
+
+[sub_resource type="SphereMesh" id="SphereMesh_35hst"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ndim"]
+transparency = 1
+albedo_color = Color(0.803922, 0.792157, 0.615686, 0.780392)
+
+[node name="SoulStrikeBolt" type="Node3D"]
+visible = false
+script = ExtResource("1_hndmb")
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_7lkh3")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(6.80473e-08, 0.447214, -0.894427, -1.49012e-08, 0.894427, 0.447214, 1, -1.71037e-08, 6.75274e-08, 0, 0, 0)
+loop = false
+
+[node name="Area3D" type="Area3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(7.54979e-08, -3.55271e-15, 1, 0.707107, 0.707107, -5.33851e-08, -0.707107, 0.707107, 5.33851e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/PathFollow3D/Area3D"]
+shape = SubResource("SphereShape3D_g8wik")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Path3D/PathFollow3D/Area3D"]
+mesh = SubResource("SphereMesh_35hst")
+skeleton = NodePath("../CollisionShape3D")
+surface_material_override/0 = SubResource("StandardMaterial3D_2ndim")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_tg1ow")
+volume_db = -30.0
+pitch_scale = 0.8
+
+[connection signal="body_entered" from="Path3D/PathFollow3D/Area3D" to="." method="_on_area_3d_body_entered"]

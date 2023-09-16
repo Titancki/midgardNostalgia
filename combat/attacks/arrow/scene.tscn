@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bg41c5q63nfqj"]
+
+[ext_resource type="Script" path="res://combat/attacks/arrow/script.gd" id="1_tr0fl"]
+[ext_resource type="AudioStream" uid="uid://ctu2un7konh76" path="res://asset/sounds/_archer_attack.wav" id="2_amanv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f4jvv"]
+size = Vector3(0.05, 1, 0.7)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ceydl"]
+top_radius = 0.015
+bottom_radius = 0.01
+height = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mq8xr"]
+albedo_color = Color(0.243137, 0.109804, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_cbo5k"]
+size = Vector3(0.1, 0.1, 0.005)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlieq"]
+albedo_color = Color(1, 0.882353, 0.792157, 1)
+
+[node name="ArrowAttack" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.5, 0)
+script = ExtResource("1_tr0fl")
+
+[node name="Arrow" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Arrow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.35)
+shape = SubResource("BoxShape3D_f4jvv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arrow"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.35)
+mesh = SubResource("CylinderMesh_ceydl")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_mq8xr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Arrow/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29998, 0)
+mesh = SubResource("PrismMesh_cbo5k")
+surface_material_override/0 = SubResource("StandardMaterial3D_jlieq")
+
+[node name="LifeSpan" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_amanv")
+volume_db = -30.0
+
+[connection signal="body_entered" from="Arrow" to="." method="_on_arrow_body_entered"]
+[connection signal="timeout" from="LifeSpan" to="." method="_on_life_span_timeout"]

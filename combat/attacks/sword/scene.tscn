@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://codywkas1b8r4"]
+
+[ext_resource type="Script" path="res://combat/attacks/sword/script.gd" id="1_apam2"]
+[ext_resource type="Texture2D" uid="uid://d0sxp1o8mw26i" path="res://asset/Miscellaneous/attack.png" id="1_btigm"]
+[ext_resource type="AudioStream" uid="uid://jvfs8wgj3a42" path="res://asset/sounds/_attack_sword.wav" id="2_jwcsf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1cci"]
+atlas = ExtResource("1_btigm")
+region = Rect2(1000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n67m8"]
+atlas = ExtResource("1_btigm")
+region = Rect2(2000, 0, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pocbu"]
+atlas = ExtResource("1_btigm")
+region = Rect2(0, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_liw1y"]
+atlas = ExtResource("1_btigm")
+region = Rect2(1000, 1000, 1000, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndhd6"]
+atlas = ExtResource("1_btigm")
+region = Rect2(2000, 1000, 1000, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nccse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1cci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n67m8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pocbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_liw1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndhd6")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 12.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ar1k3"]
+size = Vector3(0.8, 1, 1.5)
+
+[node name="DefaultAttack" type="Area3D"]
+script = ExtResource("1_apam2")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.17, 0, 0, 0, -7.43094e-09, -0.17, 0, 0.17, -7.43094e-09, 0, 0.7, 0)
+render_priority = 1
+sprite_frames = SubResource("SpriteFrames_nccse")
+animation = &"attack"
+frame = 4
+frame_progress = 1.0
+speed_scale = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.655, 0)
+shape = SubResource("BoxShape3D_ar1k3")
+
+[node name="AreaShape3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.655, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaShape3D"]
+shape = SubResource("BoxShape3D_ar1k3")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_jwcsf")
+volume_db = -35.0
+
+[connection signal="animation_finished" from="AnimatedSprite3D" to="." method="_on_animated_sprite_3d_animation_finished"]
+[connection signal="body_entered" from="AreaShape3D" to="." method="_on_attack_enemies_entered"]
+[connection signal="body_exited" from="AreaShape3D" to="." method="_on_attack_enemies_exited"]

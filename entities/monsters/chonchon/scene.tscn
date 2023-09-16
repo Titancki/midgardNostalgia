@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://cteqv1t6f61cy"]
+
+[ext_resource type="Script" path="res://entities/monsters/chonchon/script.gd" id="1_lqlnv"]
+[ext_resource type="Texture2D" uid="uid://dmfbnwxk7h4an" path="res://asset/Monsters/Chonchon/Move_down/0.png" id="2_n5ugu"]
+[ext_resource type="Texture2D" uid="uid://dh6fpy4ck40ac" path="res://asset/Monsters/Chonchon/Move_down/1.png" id="3_rl54h"]
+[ext_resource type="Texture2D" uid="uid://kvrdk508njr7" path="res://asset/Monsters/Chonchon/Move_up/0.png" id="4_lqdlk"]
+[ext_resource type="Texture2D" uid="uid://l6gi4p6pjhoe" path="res://asset/Monsters/Chonchon/Move_up/1.png" id="5_xkx7p"]
+[ext_resource type="AudioStream" uid="uid://drmbr5i1ek7ef" path="res://asset/sounds/chocho_attack.wav" id="6_oytfg"]
+[ext_resource type="AudioStream" uid="uid://cpwlnaqeynhgc" path="res://asset/sounds/chocho_stand.wav" id="7_j654r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y00hk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n5ugu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rl54h")
+}],
+"loop": true,
+"name": &"down",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_lqdlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xkx7p")
+}],
+"loop": true,
+"name": &"up",
+"speed": 20.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_amppe"]
+radius = 0.3
+
+[node name="Chonchon" type="CharacterBody3D" groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.329956, 0)
+axis_lock_linear_y = true
+script = ExtResource("1_lqlnv")
+hp = 5.0
+damage = 2.0
+overide_speed = 3.0
+experience = 5.0
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.365511, 0)
+pixel_size = 0.015
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_y00hk")
+animation = &"down"
+frame_progress = 1.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_amppe")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AttackArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_amppe")
+
+[node name="AttackDelay" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="AttackPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.381192, 0)
+stream = ExtResource("6_oytfg")
+volume_db = -20.0
+
+[node name="MovePlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.369747, 0)
+stream = ExtResource("7_j654r")
+volume_db = -25.0
+autoplay = true
+
+[node name="SoundDelayTimer" type="Timer" parent="MovePlayer3D"]
+one_shot = true
+
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_player_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_player_exited"]
+[connection signal="timeout" from="AttackDelay" to="." method="_on_attack_delay_timeout"]
+[connection signal="finished" from="MovePlayer3D" to="." method="_on_move_player_3d_finished"]
+[connection signal="timeout" from="MovePlayer3D/SoundDelayTimer" to="." method="_on_sound_delay_timer_timeout"]

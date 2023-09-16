@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://interface/damage_ui/script.gd" id="1_e625y"]
+[ext_resource type="Texture2D" uid="uid://7p2eoxrl31bl" path="res://asset/Miscellaneous/crit.png" id="2_bk6an"]
+[ext_resource type="AudioStream" uid="uid://x1vgjwjwwkgt" path="res://asset/sounds/kyrie_guard.wav" id="3_0teeo"]
+[ext_resource type="AudioStream" uid="uid://doefagjbg5x84" path="res://asset/sounds/_heal_effect.wav" id="4_ty4ap"]
+
+[sub_resource type="SystemFont" id="SystemFont_rxobi"]
+font_weight = 700
+
+[node name="DamageUI" type="Label3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.924593, 0)
+sorting_offset = 2.0
+billboard = 1
+text = "999"
+font = SubResource("SystemFont_rxobi")
+font_size = 55
+script = ExtResource("1_e625y")
+
+[node name="ShowTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="critSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+visible = false
+texture = ExtResource("2_bk6an")
+
+[node name="BlockPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_0teeo")
+volume_db = -25.0
+
+[node name="HealPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ty4ap")
+volume_db = -30.0
+
+[connection signal="timeout" from="ShowTimer" to="." method="_on_show_timer_timeout"]

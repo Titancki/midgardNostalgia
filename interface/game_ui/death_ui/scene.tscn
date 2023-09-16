@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://dor042m88k2ap"]
+
+[ext_resource type="Script" path="res://interface/game_ui/death_ui/script.gd" id="1_vqj62"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvnb5"]
+bg_color = Color(0.976471, 0.976471, 0.976471, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="DeathInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vqj62")
+
+[node name="GoToMenuBtn" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -15.5
+offset_right = 70.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.254902, 0.254902, 0.254902, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvnb5")
+text = "Go back to menu"
+
+[connection signal="pressed" from="GoToMenuBtn" to="." method="_on_go_to_menu_btn_pressed"]

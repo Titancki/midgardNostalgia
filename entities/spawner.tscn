@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6fsd7c6h3b7t"]
+
+[ext_resource type="Script" path="res://entities/spawner.gd" id="1_4g76g"]
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_4g76g")
+difficulty_multiplier = 8.0
+
+[node name="WaveDelay" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[connection signal="timeout" from="WaveDelay" to="." method="_on_wave_delay_timeout"]

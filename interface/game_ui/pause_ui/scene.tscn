@@ -1,0 +1,409 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://interface/game_ui/pause_ui/script.gd" id="1_7vph7"]
+[ext_resource type="Texture2D" uid="uid://cci8xut7hemno" path="res://asset/Miscellaneous/ui/empty_skill.png" id="2_4shva"]
+[ext_resource type="Texture2D" uid="uid://dehmy8o8ui2r2" path="res://asset/Miscellaneous/ui/bg_pause_menu.png" id="2_co28p"]
+[ext_resource type="Theme" uid="uid://dlbwwjgp1lrwp" path="res://system/default_theme.tres" id="2_wsowd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0ov2u"]
+texture = ExtResource("2_co28p")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4vwy"]
+content_margin_left = 20.0
+content_margin_right = 20.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbeg3"]
+content_margin_left = 20.0
+content_margin_right = 20.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_osefe"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_55uhu"]
+texture = ExtResource("2_4shva")
+
+[sub_resource type="Theme" id="Theme_tuox3"]
+
+[node name="PauseInterface" type="Control"]
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7vph7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_wsowd")
+theme_override_styles/panel = SubResource("StyleBoxTexture_0ov2u")
+
+[node name="TabBar" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(0, 55)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_unselected_color = Color(0, 0, 0, 0.478431)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0.486275)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.529412)
+theme_override_colors/drop_mark_color = Color(0, 0, 0, 0.545098)
+theme_override_constants/side_margin = 20
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_x4vwy")
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_tbeg3")
+theme_override_styles/panel = SubResource("StyleBoxTexture_osefe")
+
+[node name="Stats" type="Control" parent="TabBar"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabBar/Stats"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 480.0
+offset_bottom = 250.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabBar/Stats/HBoxContainer"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="StrBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/StrBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Strength : "
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/StrBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="VitBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/VitBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Vitality :"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/VitBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="DexBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/DexBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Dexterity :
+"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/DexBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="AgiBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/AgiBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Agility :
+"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/AgiBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="IntBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/IntBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Intelligence : "
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/IntBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="LuckBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/LuckBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Luck :"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer/LuckBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TabBar/Stats/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/HPBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Max Health :"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/HPBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="DamageBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/DamageBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Damage :"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/DamageBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="MagicDamageBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/MagicDamageBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "MagicDamage :
+"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/MagicDamageBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="AfterAttackDelayBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/AfterAttackDelayBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Attack Delay :
+"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/AfterAttackDelayBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="CastDelayBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/CastDelayBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Cast Speed :
+"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/CastDelayBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "WIP
+"
+
+[node name="CritChanceBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/CritChanceBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Critical Chance :
+"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/CritChanceBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="BlockBox" type="HBoxContainer" parent="TabBar/Stats/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/BlockBox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "Block Chance :
+"
+
+[node name="Value" type="Label" parent="TabBar/Stats/HBoxContainer/VBoxContainer2/BlockBox"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+text = "1
+"
+
+[node name="Skills" type="Control" parent="TabBar"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabBar/Skills"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 20.0
+offset_top = 20.0
+theme_override_constants/separation = 20
+
+[node name="col-1" type="VBoxContainer" parent="TabBar/Skills/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="row-1" type="Button" parent="TabBar/Skills/HBoxContainer/col-1"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="row-2" type="Button" parent="TabBar/Skills/HBoxContainer/col-1"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="row-3" type="Button" parent="TabBar/Skills/HBoxContainer/col-1"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="col-2" type="VBoxContainer" parent="TabBar/Skills/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="row-1" type="Button" parent="TabBar/Skills/HBoxContainer/col-2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="row-2" type="Button" parent="TabBar/Skills/HBoxContainer/col-2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="row-3" type="Button" parent="TabBar/Skills/HBoxContainer/col-2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="col-3" type="VBoxContainer" parent="TabBar/Skills/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="row-1" type="Button" parent="TabBar/Skills/HBoxContainer/col-3"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme = SubResource("Theme_tuox3")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="row-2" type="Button" parent="TabBar/Skills/HBoxContainer/col-3"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="row-3" type="Button" parent="TabBar/Skills/HBoxContainer/col-3"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/disabled = SubResource("StyleBoxTexture_55uhu")
+disabled = true
+
+[node name="Tooltip" type="Control" parent="TabBar/Skills/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabBar/Skills/HBoxContainer/Tooltip"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabBar/Skills/HBoxContainer/Tooltip/VBoxContainer"]
+layout_mode = 2
+
+[node name="Skill Name" type="Label" parent="TabBar/Skills/HBoxContainer/Tooltip/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+horizontal_alignment = 1
+
+[node name="Level" type="Label" parent="TabBar/Skills/HBoxContainer/Tooltip/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+
+[node name="Description" type="Label" parent="TabBar/Skills/HBoxContainer/Tooltip/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_wsowd")
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 2
+
+[node name="Options" type="Control" parent="TabBar"]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-1/row-1" to="." method="_on_job_1_1_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-1/row-2" to="." method="_on_job_1_2_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-1/row-3" to="." method="_on_job_1_3_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-2/row-1" to="." method="_on_job_2_1_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-2/row-2" to="." method="_on_job_2_2_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-2/row-3" to="." method="_on_job_2_3_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-3/row-1" to="." method="_on_job_3_1_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-3/row-2" to="." method="_on_job_3_2_pressed"]
+[connection signal="pressed" from="TabBar/Skills/HBoxContainer/col-3/row-3" to="." method="_on_job_3_3_pressed"]

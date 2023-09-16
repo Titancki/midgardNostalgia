@@ -1,0 +1,355 @@
+[gd_scene load_steps=14 format=3 uid="uid://b0suggart5qj5"]
+
+[ext_resource type="Texture2D" uid="uid://c3nncpm8qtct8" path="res://asset/Heads/Brown/down.png" id="1_0x46w"]
+[ext_resource type="Script" path="res://interface/game_ui/script.gd" id="1_htwb0"]
+[ext_resource type="Script" path="res://interface/game_ui/info_ui/script.gd" id="2_73lbt"]
+[ext_resource type="Theme" uid="uid://dlbwwjgp1lrwp" path="res://system/default_theme.tres" id="2_wcwtt"]
+[ext_resource type="Texture2D" uid="uid://g7pxwsccm7vf" path="res://asset/Miscellaneous/ui/progress_bar.png" id="4_2y2rw"]
+[ext_resource type="Texture2D" uid="uid://cci8xut7hemno" path="res://asset/Miscellaneous/ui/empty_skill.png" id="6_gktlw"]
+[ext_resource type="Texture2D" uid="uid://dt458tt0d27li" path="res://asset/icons/skills/empty_effect.png" id="7_l877u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btl61"]
+bg_color = Color(0.74902, 0.737255, 0.941176, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n1de3"]
+texture = ExtResource("4_2y2rw")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jog6x"]
+line_spacing = 0.0
+font_size = 8
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u6502"]
+texture = ExtResource("6_gktlw")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qhrs6"]
+bg_color = Color(0.74902, 0.737255, 0.941176, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukthy"]
+bg_color = Color(0.333333, 0.490196, 0.870588, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[node name="GameInterface" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_htwb0")
+
+[node name="InfoContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_wcwtt")
+script = ExtResource("2_73lbt")
+
+[node name="Panel" type="Panel" parent="InfoContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+offset_right = 233.0
+offset_bottom = 66.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoContainer"]
+layout_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 198.0
+offset_bottom = 55.0
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="InfoContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_0x46w")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InfoContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="JobText" type="Label" parent="InfoContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Novice"
+
+[node name="LevelText" type="Label" parent="InfoContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Lvl.1"
+
+[node name="HPBar" type="ProgressBar" parent="InfoContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(175, 15)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_btl61")
+theme_override_styles/fill = SubResource("StyleBoxTexture_n1de3")
+fill_mode = 1
+show_percentage = false
+
+[node name="Value" type="Label" parent="InfoContainer/HBoxContainer/VBoxContainer/HPBar"]
+layout_mode = 0
+offset_right = 174.0
+offset_bottom = 15.0
+text = "100/100"
+label_settings = SubResource("LabelSettings_jog6x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SPBar" type="ProgressBar" parent="InfoContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(175, 15)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_btl61")
+theme_override_styles/fill = SubResource("StyleBoxTexture_n1de3")
+fill_mode = 1
+show_percentage = false
+
+[node name="Value" type="Label" parent="InfoContainer/HBoxContainer/VBoxContainer/SPBar"]
+layout_mode = 0
+offset_right = 174.0
+offset_bottom = 15.0
+text = "100/100"
+label_settings = SubResource("LabelSettings_jog6x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Label" parent="InfoContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -23.0
+offset_right = -50.0
+offset_bottom = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "30:00"
+
+[node name="effects" type="VBoxContainer" parent="InfoContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_right = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Control" type="Control" parent="InfoContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="InfoContainer/Control"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -20.0
+offset_right = 190.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Skill Bar" type="HBoxContainer" parent="InfoContainer/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -15.0
+offset_right = 180.0
+offset_bottom = 15.0
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="skill1" type="Panel" parent="InfoContainer/Control/Skill Bar"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_u6502")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="InfoContainer/Control/Skill Bar/skill1"]
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 30.0
+fill_mode = 4
+texture_progress = ExtResource("7_l877u")
+tint_under = Color(1, 1, 1, 0)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0, 0, 0, 0.552941)
+
+[node name="skill2" type="Panel" parent="InfoContainer/Control/Skill Bar"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_u6502")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="InfoContainer/Control/Skill Bar/skill2"]
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 30.0
+fill_mode = 4
+texture_progress = ExtResource("7_l877u")
+tint_under = Color(1, 1, 1, 0)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0, 0, 0, 0.552941)
+
+[node name="skill3" type="Panel" parent="InfoContainer/Control/Skill Bar"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_u6502")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="InfoContainer/Control/Skill Bar/skill3"]
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 30.0
+fill_mode = 4
+texture_progress = ExtResource("7_l877u")
+tint_under = Color(1, 1, 1, 0)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0, 0, 0, 0.552941)
+
+[node name="skill4" type="Panel" parent="InfoContainer/Control/Skill Bar"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_u6502")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="InfoContainer/Control/Skill Bar/skill4"]
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 30.0
+fill_mode = 4
+texture_progress = ExtResource("7_l877u")
+tint_under = Color(1, 1, 1, 0)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0, 0, 0, 0.552941)
+
+[node name="Control" type="Control" parent="InfoContainer/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="InfoContainer/Control/Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="auto" type="Panel" parent="InfoContainer/Control/Control"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_u6502")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="InfoContainer/Control/Control/auto"]
+layout_mode = 0
+offset_right = 29.0
+offset_bottom = 30.0
+fill_mode = 4
+texture_progress = ExtResource("7_l877u")
+tint_under = Color(1, 1, 1, 0)
+tint_over = Color(1, 1, 1, 0)
+tint_progress = Color(0, 0, 0, 0.552941)
+
+[node name="LevelInfo" type="Control" parent="."]
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -50.0
+offset_right = 250.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_wcwtt")
+
+[node name="Panel" type="Panel" parent="LevelInfo"]
+custom_minimum_size = Vector2(500, 75)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LevelInfo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.5
+anchor_bottom = -0.5
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 383.0
+offset_bottom = 37.0
+theme_override_constants/separation = 9
+
+[node name="Label" type="Label" parent="LevelInfo/HBoxContainer"]
+layout_mode = 2
+text = "Experience"
+
+[node name="ExpBar" type="ProgressBar" parent="LevelInfo/HBoxContainer"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_qhrs6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ukthy")

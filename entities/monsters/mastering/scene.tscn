@@ -1,0 +1,150 @@
+[gd_scene load_steps=21 format=3 uid="uid://dt7ewu781pgff"]
+
+[ext_resource type="Script" path="res://entities/monsters/mastering/script.gd" id="1_m1m6j"]
+[ext_resource type="Texture2D" uid="uid://087prqwfqk7a" path="res://asset/Monsters/Poring/Move/up/0.png" id="2_1w7u4"]
+[ext_resource type="Texture2D" uid="uid://cdtu2wcysy1w1" path="res://asset/Monsters/Poring/Move/up/1.png" id="3_1o6pa"]
+[ext_resource type="Texture2D" uid="uid://bm7jqorx08ug4" path="res://asset/Monsters/Poring/Move/up/2.png" id="4_s4lih"]
+[ext_resource type="Texture2D" uid="uid://ck0lphsys4sc8" path="res://asset/Monsters/Poring/Move/up/3.png" id="5_5smta"]
+[ext_resource type="Texture2D" uid="uid://wbc10e0xco8v" path="res://asset/Monsters/Poring/Move/up/4.png" id="6_t4bvf"]
+[ext_resource type="Texture2D" uid="uid://b7ssg43dlmwnh" path="res://asset/Monsters/Poring/Move/up/5.png" id="7_jgwnr"]
+[ext_resource type="Texture2D" uid="uid://di04dbyq8h1b7" path="res://asset/Monsters/Poring/Move/up/6.png" id="8_172bv"]
+[ext_resource type="Texture2D" uid="uid://dwb2xpofmf5eq" path="res://asset/Monsters/Poring/Move/up/7.png" id="9_04yda"]
+[ext_resource type="AudioStream" uid="uid://cyw3ilao5j6cj" path="res://asset/sounds/poring_damage.wav" id="10_knstw"]
+[ext_resource type="AudioStream" uid="uid://d2s122qomjq10" path="res://asset/sounds/poring_move.wav" id="11_bq4l7"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_22k2b"]
+load_path = "res://.godot/imported/0.png-1fbc848f27b71c924522adc4e6421460.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_12h7o"]
+load_path = "res://.godot/imported/1.png-120db08d283d1022d273886784389637.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xypmh"]
+load_path = "res://.godot/imported/2.png-101b37bd0ed873fc639857226a0b2f75.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v52br"]
+load_path = "res://.godot/imported/3.png-7371ed4929f52eab61825867b65e93d7.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qipad"]
+load_path = "res://.godot/imported/4.png-3bbea8032a0126348c801b9f5bb133d0.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2du38"]
+load_path = "res://.godot/imported/5.png-bcb806c7b35f7b9ee8a3d5b09bfbb14c.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kp2j7"]
+load_path = "res://.godot/imported/7.png-882379f114604f75369828771a9c5d9a.s3tc.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y00hk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_22k2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_12h7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_xypmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_v52br")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_qipad")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_2du38")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_kp2j7")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1w7u4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1o6pa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s4lih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5smta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t4bvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jgwnr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_172bv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_04yda")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_amppe"]
+margin = 0.08
+radius = 0.6
+
+[node name="Mastering" type="CharacterBody3D" groups=["enemies"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31, 0)
+script = ExtResource("1_m1m6j")
+hp = 250.0
+damage = 3.0
+experience = 200.0
+overide_speed = 3.0
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.365511, 0)
+pixel_size = 0.035
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_y00hk")
+animation = &"up"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_amppe")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="AttackArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackArea"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_amppe")
+
+[node name="AttackDelay" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="AttackPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_knstw")
+volume_db = -30.0
+
+[node name="MovePlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("11_bq4l7")
+volume_db = -40.0
+autoplay = true
+
+[node name="SoundDelayTimer" type="Timer" parent="MovePlayer3D"]
+one_shot = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_player_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_player_exited"]
+[connection signal="timeout" from="AttackDelay" to="." method="_on_attack_delay_timeout"]
+[connection signal="finished" from="MovePlayer3D" to="." method="_on_move_player_3d_finished"]
+[connection signal="timeout" from="MovePlayer3D/SoundDelayTimer" to="." method="_on_sound_delay_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
